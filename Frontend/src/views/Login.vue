@@ -42,10 +42,10 @@ export default {
             this.$router.push('/admin');
           }
           else if(data.user_details.roles[0] === 'company'){
-            if(data.user_details.company_profile.approve_status==='approved'){
+            if(data.user_details.company_profile.approve_status=='Approved'){
               this.$router.push('/company')
             }
-            else(this.message="Wait for admin approval",this.messageType='danger')
+            this.message="Wait for admin approval",this.messageType='danger'
           }
 
         }else {
@@ -65,11 +65,11 @@ export default {
 
 <template>
     <!-- to display the error message -->
-  <div class="container ">
-    <div v-if="message" :class="['alert', 'alert-' + messageType, 'alert-dismissible', 'fade', 'show','toast']" role="alert">
-      {{ message }}
-      <button type="button" class="btn-close" @click="message = ''"></button>
+    <div v-if="message" :class="['alert', 'text-bg-' + messageType,'alert-dismissible', 'fade', 'show','toast'] " role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" @click="message = ''"></button>
     </div>
+  <div class="container ">
 
     <!-- the login box -->
     <div class="row vh-100 align-items-center justify-content-center d-flex ">

@@ -1,5 +1,5 @@
 <template>
-       <div v-if="message" :class="['alert', 'alert-' + messageType,'alert-dismissible', 'fade', 'show','toast'] " role="alert">
+       <div v-if="message" :class="['alert', 'text-bg-' + messageType,'alert-dismissible', 'fade', 'show','toast'] " role="alert">
           {{ message }}
             <button type="button" class="btn-close" @click="message = ''"></button>
         </div>
@@ -51,7 +51,6 @@ export default{
                 this.messageType='danger';
                 return;
             }
-
             const payload = {
                 username : this.registerDetails.username,
                 password : this.registerDetails.password,
@@ -64,15 +63,16 @@ export default{
                     body:JSON.stringify(payload),
                 });
                 const data = await response.json();
-
                 if (response.ok){
                     this.message = "Company Registered Successfully";
                     this.messageType = 'success';
                     setTimeout(()=>{this.$router.push('/login')},2000)
-                    
+                }else{
+                  this.message=data.message,
+                  this.messageType='danger'
                 }
             }catch(error){
-                    this.message = "Registration Failed",
+                    this.message = data.message,
                     this.messageType = 'danger'
             }
         } 
