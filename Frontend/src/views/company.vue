@@ -11,12 +11,13 @@
             <div class="col-md-4 mb-4" v-for="d in drives" :key="d.drive_id">
                 <div class="card h-100 shadow-sm">
                     <div class="card-header bg-primary text-white">
-                        <h5 class="card-title mb-0"> 🎫 {{ d.job_title }}</h5>
+                        <span class="badge rounded-pill bg-danger top-0 start-0 position-absolute">{{ d.application_count }}</span>
+                        <h5 class="card-title px-4 mb-1"> 🎫 {{ d.job_title }}</h5>
                         <div class="position-absolute top-0 end-0 d-flex m-2">
                             <span class="badge bg-warning text-black">{{ d.post_status }}</span>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body"> 
                         <div class="row">
                             <p class="card-text col-12"><strong>📍 Location:</strong> {{ d.location }}</p>
                             <p class="card-text col-6"><strong>💼 Type:</strong> {{ d.type }}</p>
@@ -26,10 +27,8 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
-                        <!-- <span :class="d.approve_status === 'Approved' ? 'badge bg-success' : 'badge bg-warning'">
-                            {{ d.approve_status }}
-                        </span> -->
-                        <button class="btn btn-primary" @click="editDrive(d.drive_id)">Edit</button>
+                  
+                        <button class="btn btn-primary" @click="$router.push(`/company/drive/info/${d.drive_id}`)">View</button>
                         <button class="btn btn-primary" @click="deleteDrive(d.drive_id)">Delete</button>
                         <button class="btn btn-primary" @click="driveStatus(d.drive_id)">Toggle</button>
 
@@ -74,31 +73,7 @@ export default{
                 this.messageType='danger';
             }
         },
-        async editDrive(drive_id){
-            try{
-                const response = await fetch('http://localhost:5000/api/company/edit',{
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json",
-                    "Authentication-Token":localStorage.getItem('token')
-                },
-                body: JSON.stringify({'drive_id':drive_id})
-
-            });
-            const data = await response.json();
-            if(response.ok){
-                this.message=data.message;
-                this.messageType='success';
-                this.dash()
-            }else{
-                this.message=data.message;
-                this.messageType='danger';
-            }
-            }catch(error){
-                this.message="Drive could not be edited";
-                this.messageType='danger';
-            }
-        },
+        
         async driveStatus(drive_id){
             try{
                 const res = await fetch('http://localhost:5000/api/company/drive-status',{

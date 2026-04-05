@@ -21,6 +21,10 @@ const router = createRouter({
       'name':'student-register',
       'component':()=>import('../views/Student_reg.vue')
     },
+    
+
+
+
     // student routes
     {
       'path':'/student',
@@ -73,6 +77,12 @@ const router = createRouter({
       'component':()=>import('../views/companyProfile.vue')
     },
 
+    {
+      'path':'/company/drive/info/:id',
+      'name':'company-drive-info',
+      'component':()=>import('../views/DriveInfo.vue')
+    },
+    
 
   ],
 })

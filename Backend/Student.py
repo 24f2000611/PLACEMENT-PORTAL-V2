@@ -1,30 +1,72 @@
 from flask_restful import Resource
 from flask import request,jsonify , make_response
 from Backend.user_datastore import user_datastore
-from flask_security import utils,auth_token_required,roles_required
+from flask_security import utils,auth_token_required,roles_required,login_required
 from Backend.models import *
 from flask_security import current_user
+from flask_security.utils import hash_password,verify_password
 
 
-class UpdateProfile(Resource):
+class Mydashboard(Resource):
+    @login_required
     @auth_token_required
     @roles_required('student')
     def get(self):
         user = current_user
         student = user.student_profile
-        return {
+        profile= {
             "username":user.username,
-            "password":user.password,
             "email":user.email,
             "education":student.education,
             "skill":student.skill,
             "description":student.description
+        }
+    
+        applications = []
+        for app in student.applications:
+            applications.append({
+                "app_id":app.app_id,
+                "job_title":app.drive.job_title,
+                "eligibility":app.drive.eligibility,
+                "description":app.drive.job_desc,
+                "salary":app.drive.salary,
+                "type":app.drive.type,
+                "location":app.drive.location,
+                "company_name":app.drive.company.user_comp.username,
+                "industry":app.drive.company.industry,
+                "status":app.status,
+                "app_deadline":app.drive.app_deadline.strftime("%Y-%m-%dT%H:%M"),
+                "date_applied":app.date_applied.strftime("%Y-%m-%dT%H:%M")
+
+            })
+
+        active_drives = []
+        for d in PlacementDrive.query.filter_by(approve_status='Approved').all():
+            active_drives.append({
+                "drive_id":d.drive_id,
+                "job_title":d.job_title,
+                "company_name":d.company.user_comp.username,
+                "job_description":d.job_desc,
+                "salary":d.salary,
+                "type":d.type,
+                "location":d.location,
+                "app_deadline":d.app_deadline.strftime("%Y-%m-%dT%H:%M"),
+                "eligibility":d.eligibility,
+                "post_status":d.post_status
+
+            })
+
+        return {
+            "profile":profile,
+            "applications":applications,
+            "active_drives":active_drives
         },200
-
-
+        
+            # update profile
+    
     @auth_token_required
     @roles_required('student')
-    def put(self):
+    def post(self):
         user = current_user
         user_info = request.get_json()
         if not user_info:
@@ -32,10 +74,11 @@ class UpdateProfile(Resource):
         
         if 'username' in user_info:
             user.username = user_info['username']
-        if 'email':
+        if 'email' in user_info:
             user.email = user_info['email']
-        if 'password' in user_info:
-            user.password = user_info['password']
+        if 'password' in user_info and user_info['password']:
+            from flask_security import hash_password
+            user.password = hash_password(user_info['password'])
         
         student= user.student_profile
         if student:
@@ -52,6 +95,7 @@ class UpdateProfile(Resource):
 
 
 class ApplyJob(Resource):
+    @login_required
     @auth_token_required
     @roles_required('student')
     def post(self):
@@ -62,48 +106,22 @@ class ApplyJob(Resource):
         if not drive:
             return {"message":"Placement Drive not found"},404
         
-        if drive.app_deadline< datetime.utcnow():
+        if drive.app_deadline < datetime.utcnow():
             return {"message":"Application deadline has passed"},400
-        
+            
         existing_app = Application.query.filter_by(student_id =current_user.id,drive_id=drive_id).first()
 
         if existing_app:
             return {"message":"You have already applied for this drive"},400
         
-        new_application = Application(student_id =current_user.id,drive_id= drive_id)
+        new_application = Application(student_id =current_user.id,drive_id= drive_id,app_id=current_user.student_profile.id)
         db.session.add(new_application)
         db.session.commit()
         return {"message":"Application submitted successfully"},200
 
 
-class MyApplications(Resource):
-    @auth_token_required
-    def get(self):
-        applications =Application.query.filter_by(student_id=current_user.id).all()
-        if not applications:
-            return {"message":"No applications found"},404
-        
-        result = []
-        for app in applications:
-            result.append({
-                'application_id':app.app_id,
-                "job_title":app.drive.job_title,
-                "job_desc":app.drive.job_desc,
-                "eligibility":app.drive.eligibility,
-                "app_deadline":app.drive.app_deadline.strftime("%Y-%m-%d"),
-                "location":app.drive.location,
-                "type":app.drive.type,
-                "salary":app.drive.salary,
-                "company_name":app.drive.company.user_comp.username,
-                "industry":app.drive.company.industry,
-                "status":app.status
-
-            })
-
-        return result, 200
-
-
 class Interview(Resource):
+    @login_required
     @roles_required('student')
     @auth_token_required
     def get(self):
@@ -122,12 +140,14 @@ class Interview(Resource):
                 "company_name":offer.drive.company.user_comp.username,
                 "industry":offer.drive.company.industry,
                 "package_offered":offer.package_offered,
-                "interview_date":offer.interview_date.strftime("%Y-%m-%d")
+                "interview_date":offer.interview_date.strftime("%Y-%m-%dT%H:%M")
 
             })
         return result,200
 
 class OfferLetter(Resource):
+    @login_required
+
     @roles_required('student')
     @auth_token_required
     def get(self):
@@ -141,7 +161,7 @@ class OfferLetter(Resource):
                 "company_name":offer.drive.company.user_comp.username,
                 "industry":offer.drive.company.industry,
                 "package_offered":offer.package_offered,
-                "joining_date": offer.joining_date.strftime("%Y-%m-%d") if offer.joining_date else "TBD",  
+                "joining_date": offer.joining_date.strftime("%Y-%m-%dT%H:%M") if offer.joining_date else "TBD",  
                 "location":offer.drive.location,
                 "type":offer.drive.type,
                 "description":offer.description
@@ -152,6 +172,7 @@ class OfferLetter(Resource):
 
 
 class Search(Resource):
+    @login_required
     @auth_token_required
     @roles_required('student')
     def get(self):
@@ -160,7 +181,7 @@ class Search(Resource):
         type = request.args.get('type','')
         location = request.args.get('location','')
 
-        query = PlacementDrive.query.join(Company).join(User,Company.company_id == User.id)
+        query = PlacementDrive.query.join(Company)
 
         if title:
             query = query.filter(PlacementDrive.job_title.ilike(f"%{title}%"))
@@ -186,8 +207,7 @@ class Search(Resource):
                 "company_name": drive.company.user.username,
                 "location": drive.location,
                 "salary": drive.salary,
-                "skills": drive.skills_required,
-                "deadline": drive.app_deadline.strftime("%Y-%m-%d") if drive.app_deadline else None
+                "deadline": drive.app_deadline.strftime("%Y-%m-%dT%H:%M") if drive.app_deadline else None
             })
 
         return output, 200

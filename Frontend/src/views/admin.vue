@@ -232,8 +232,8 @@ export default{
             <div class="students col-md-6" v-for="student in reg_students" :key="student.id">
                 <div class="col-12">
                     <div class="card">
+                        <h5 class="card-header bg-info">{{ student.username }}</h5>
                         <div class="card-body row gap-3">
-                            <h5 class="card-header">{{ student.username }}</h5>
                             <span class="card-text col-4">📧 {{ student.email }}</span>
                             <span class="card-text col-6">⚡{{ student.skill}}</span>
                             <span class="card-text col-4">🎓{{ student.education }}</span>
@@ -242,7 +242,7 @@ export default{
                             <div class="col-md-2 position-absolute end-0 bottom-0 p-3">
                                 <span><button class="btn btn-danger" @click="handleDelete(student.id,'Student')">Delete</button></span>
                             </div>
-                        </div>
+                        </div>              
                     </div>
                 </div>
             </div>
@@ -254,11 +254,11 @@ export default{
             <div class="companies col-md-6" v-for="company in reg_companies" :key="company.company_id">
                 <div class="col-12">
                     <div class="card">
+                        <div class="card-header bg-info">
+                            <span class="badge text-bg-primary position-absolute end-0 px-1 mx-3">{{ company.approve_status }}</span>
+                            <h5>{{ company.username }}</h5>
+                        </div>
                         <div class="card-body row gap-3">
-                            <div class="card-header">
-                                <span class="badge text-bg-warning position-absolute end-0 px-1 mx-3">{{ company.approve_status }}</span>
-                                <h5>{{ company.username }}</h5>
-                            </div>
                             <span class="card-text col-4 ">📧{{ company.email }}</span>
                             <span class="card-text col-6 ">📞{{ company.hr_contact }}</span>
                             <span class="card-text col-6 ">🏭{{ company.industry}}</span>
@@ -280,11 +280,11 @@ export default{
             <div class="Drives col-md-6" v-for="drive in active_drives" :key="drive.drive_id">
                 <div class="col-12">
                     <div class="card">
+                        <div class="card-header bg-info">
+                            <span class="badge text-bg-primary position-absolute top-0 px-1 m-3 end-0">{{ drive.post_status }}</span>
+                            <h5> 🎫{{ drive.job_title }}</h5>
+                        </div>
                         <div class="card-body row gap-3">
-                            <div class="card-header">
-                                <span class="badge text-bg-primary position-absolute top-0 px-1 m-3 end-0">{{ drive.post_status }}</span>
-                                <h5> 🎫{{ drive.job_title }}</h5>
-                            </div>
                             <span class="card-text col-3">📋{{ drive.eligibility }}</span>
                             <span class="card-text col-3">📍{{ drive.location }}</span>
                             <span class="card-text col-3">🎯{{ drive.type}}</span>
@@ -306,19 +306,19 @@ export default{
         <div class="row">
             <div class="Applications col-md-4" v-for="app in applications" :key="app.application_id">
                 <div class="col-12">
-                    <div class="card bg-warning">
-                        <div class="card-body row gap-3">
-                            <h5 class="card-header">🎫{{ app.job_title }}</h5>
-                            <span class="card-text col-4">🧑‍🎓{{ app.student_name }}</span>
-                            <span class="card-text col-4">🏢{{ app.company_name }}</span>
-                            <span class="card-text col-4">📍{{ app.location}}</span>
+                    <div class="card">
+                        <h5 class="card-header bg-info">🎫{{ app.job_title }}</h5>
+                        <div class="card-body  row gap-3">
+                            <span class="card-text col-3">🧑‍🎓{{ app.student_name }}</span>
+                            <span class="card-text col-3">🏢{{ app.company_name }}</span>
+                            <span class="card-text col-3">📍{{ app.location}}</span>
                             <span class="card-text col-4">💸{{ app.salary}}</span>
                             <span class="card-text col-4">🎯{{ app.type}}</span>
                             <span class="card-text col-4">⏱️{{ app.date_applied}}</span>
-                            <span class="card-text col-4">📑{{ app.description}}</span>
+                            <span class="card-text col-8">📑{{ app.description}}</span>
+                            <div class="col-md-2 end-0 bottom-0 position-absolute mx-4">
 
-                            <div class="col-md-2 position-absolute end-0 bottom-0 p-3">
-                                <span><button class="btn btn-danger" @click="handleDelete(app.application_id,'Application')">Delete</button></span>
+                                <span><button class="btn btn-danger end-0" @click="handleDelete(app.application_id,'Application')">Delete</button></span>
                             </div>
                         </div>
                     </div>

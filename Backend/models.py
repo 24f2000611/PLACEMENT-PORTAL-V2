@@ -41,27 +41,6 @@ class UserRoles(db.Model):
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id',ondelete='CASCADE'))
 
 
-class Company(db.Model):
-    __tablename__ = 'company'
-    id = db.Column(db.Integer,primary_key=True)
-    company_id = db.Column(db.Integer,db.ForeignKey('users.id',ondelete='CASCADE'))
-    industry = db.Column(db.String(150),nullable=True)
-    location = db.Column(db.String(150),nullable=True) 
-    approve_status = db.Column(db.String(20),nullable=True,default='Pending') # pending,approved,rejected
-    hr_contact = db.Column(db.String(150),nullable=True)
-    website = db.Column(db.String(200),nullable=True)
-    drives = db.relationship('PlacementDrive',backref='company',cascade = 'all,delete')
-
-
-class Student(db.Model):
-    __tablename__  ='students'
-    id = db.Column(db.Integer,primary_key=True)
-    user_id = db.Column(db.Integer,db.ForeignKey('users.id',ondelete='CASCADE'),nullable=False)
-    education = db.Column(db.String(200),nullable=True)
-    skill = db.Column(db.String(250),nullable=True)
-    description = db.Column(db.String(300),nullable=True)
-    applications = db.relationship('Application',backref='student',cascade='all,delete-orphan')
-
 
 class PlacementDrive(db.Model):
     __tablename__='drives'
@@ -85,11 +64,32 @@ class Application(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     student_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     app_id = db.Column(db.Integer,db.ForeignKey('students.id'))
-    # application_date = db.Column(db.DateTime)
     drive_id = db.Column(db.Integer,db.ForeignKey('drives.drive_id'))
     date_applied = db.Column(db.DateTime,default=datetime.utcnow)
     status = db.Column(db.String(30),default='Applied') # applied ,rejected, selected, shorlisted,interview
 
+
+class Company(db.Model):
+    __tablename__ = 'company'
+    id = db.Column(db.Integer,primary_key=True)
+    company_id = db.Column(db.Integer,db.ForeignKey('users.id',ondelete='CASCADE'))
+    industry = db.Column(db.String(150),nullable=True)
+    location = db.Column(db.String(150),nullable=True) 
+    approve_status = db.Column(db.String(20),nullable=True,default='Pending') # pending,approved,rejected
+    hr_contact = db.Column(db.String(150),nullable=True)
+    website = db.Column(db.String(200),nullable=True)
+    drives = db.relationship('PlacementDrive',backref='company',cascade = 'all,delete')
+
+
+class Student(db.Model):
+    __tablename__  ='students'
+    id = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id',ondelete='CASCADE'),nullable=False)
+    education = db.Column(db.String(200),nullable=True)
+    skill = db.Column(db.String(250),nullable=True)
+    description = db.Column(db.String(300),nullable=True)
+    # location = db.Column(db.String(100),nullable=True)
+    applications = db.relationship('Application',backref='student',cascade='all,delete-orphan')
 
 
 class Placement(db.Model):

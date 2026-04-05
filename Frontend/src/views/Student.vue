@@ -9,8 +9,8 @@
             <div class="students col-md-5 mb-2" v-for="drive in active_drives" :key="drive.drive_id">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body row">
-                            <h5 class="card-header">🎫{{ drive.job_title }}</h5>
+                        <h5 class="card-header bg-info">🎫{{ drive.job_title }}</h5>
+                        <div class="card-body row gap-2">
                             <span class="card-text col-4">🎯{{ drive.type }}</span>
                             <span class="card-text col-4">💸{{ drive.salary }}</span>
                             <span class="card-text col-4">📍{{ drive.location}}</span>
@@ -29,17 +29,14 @@
             <div class="applications col-md-5 mb-3" v-for="app in applications" :key="app.app_id">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body row">
-                            <div class="card-header">
-                            <h5 class="card-text">🎫{{ app.job_title }}</h5>
-                            </div>
-                            
+                        <h5 class="card-header bg-info">🎫{{ app.job_title }}</h5>
+                        <div class="card-body row gap-2">
                             <span class="card-text col-4">🎯{{ app.type }}</span>
                             <span class="card-text col-4">💸{{ app.salary }}</span>
                             <span class="card-text col-4">📍{{ app.location}}</span>
                             <span class="card-text col-4">⏱️{{ app.app_deadline}}</span>
-                            <span class="card-text col-4">📋{{ app.eligibility}}</span>
-                            <span class="card-text col-4">📑{{ app.description}}</span>
+                            <span class="card-text col-8">📋{{ app.eligibility}}</span>
+                            <span class="card-text col-12">📑{{ app.description}}</span>
                         </div>
                     </div>
 
@@ -116,7 +113,7 @@ export default{
 </script>
 
 
-<style>
+<style scoped>
 body{
     background-color: rgb(58, 96, 248);
 }

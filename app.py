@@ -36,28 +36,37 @@ from Backend.Student import *
 from Backend.company import *
 from Backend.admin import *
 
+
+# api.add_resource(Home,'/')
 # authentication
 
 api.add_resource(LoginAPI,'/api/login')
 api.add_resource(LogoutAPI,'/api/logout')
 api.add_resource(CompanyRegisterAPI,'/api/company/register')
 api.add_resource(StudentRegisterAPI,'/api/student/register')
+
 # student
 
-api.add_resource(UpdateProfile,'/api/profile/update','/api/profile')
+api.add_resource(Mydashboard,'/api/student','/api/student/profile','/api/student/profile/update')
 api.add_resource(ApplyJob,'/api/student/applyjob')
-api.add_resource(MyApplications,'/api/student/applications','/api/applications')
 api.add_resource(Interview,'/api/student/interviews')
 api.add_resource(OfferLetter,'/api/student/offers')
 api.add_resource(Search,'/api/student/search')
 
-# company
-
-
 
 # admin
+api.add_resource(DashBoardInfo,'/api/admin')
+api.add_resource(Approvals,'/api/admin/approvals')
+api.add_resource(Delete,'/api/admin/delete')
+api.add_resource(AdminSearch,'/api/admin/search')
 
-
+# company
+api.add_resource(PostJob,'/api/company/profile/post-job')
+api.add_resource(Dashboard,'/api/company/profile','/api/company','/api/company/profile/update')
+api.add_resource(DeleteDrive,'/api/company/delete')
+api.add_resource(DriveStatus,'/api/company/drive-status')
+api.add_resource(DriveInfo,'/api/company/drive/info/<int:drive_id>')
+api.add_resource(UpdateAppStatus,'/api/company/drive/info/status')
 
 
 if __name__=='__main__':
