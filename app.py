@@ -65,8 +65,8 @@ api.add_resource(PostJob,'/api/company/profile/post-job')
 api.add_resource(Dashboard,'/api/company/profile','/api/company','/api/company/profile/update')
 api.add_resource(DeleteDrive,'/api/company/delete')
 api.add_resource(DriveStatus,'/api/company/drive-status')
-api.add_resource(DriveInfo,'/api/company/drive/info/<int:drive_id>')
 api.add_resource(UpdateAppStatus,'/api/company/drive/info/status')
+api.add_resource(DriveInfo,'/api/company/drive/info/<int:drive_id>')
 
 
 if __name__=='__main__':

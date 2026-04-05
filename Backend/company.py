@@ -100,6 +100,8 @@ class PostJob(Resource):
         
 
 class DeleteDrive(Resource):
+    @auth_token_required
+    @login_required
     def post(self):
         drive_id = request.get_json().get('drive_id')
         drive = PlacementDrive.query.filter_by(drive_id=drive_id).first()
@@ -111,6 +113,8 @@ class DeleteDrive(Resource):
             return {"message":"Drive could not be deleted"},400
         
 class DriveInfo(Resource):
+    @auth_token_required
+    @login_required
     def get(self,drive_id):
         drive = PlacementDrive.query.filter_by(drive_id=drive_id).first()
         drive_det= {
@@ -128,7 +132,7 @@ class DriveInfo(Resource):
         students = []
         for s in drive.application_rel:
             students.append({
-                "app_id":s.app_id,
+                "app_id":s.id,
                 "id":s.student.user_id,
                 "username":s.student.user_stu.username,
                 "email":s.student.user_stu.email,
@@ -143,6 +147,8 @@ class DriveInfo(Resource):
 
 
 class UpdateAppStatus(Resource):
+    @auth_token_required
+    @login_required
     def post(self):
         app_id= request.get_json().get('id')
         app = Application.query.filter_by(id=app_id).first()
@@ -157,13 +163,14 @@ class UpdateAppStatus(Resource):
                 app.status='Rejected'
             else:
                 app.status='Applied'
-
             db.session.commit()
             return {"message":f"Application status updated to: {app.status}"},200
         return {"message":"Application cannot be updated"},404
     
 
 class DriveStatus(Resource):
+    @auth_token_required
+    @login_required
     def post(self):
         drive_id = request.get_json().get('drive_id')
         drive = PlacementDrive.query.filter_by(drive_id=drive_id).first()

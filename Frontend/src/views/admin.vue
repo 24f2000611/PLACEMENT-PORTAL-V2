@@ -208,7 +208,7 @@ export default{
         </div>
 
        <div v-if="searchResults.applications && searchResults.applications.length>0">
-            <h2>Results for companies</h2>
+            <h2>Results for Applications</h2>
             <div class="col-6">
                 <div class="card">
                     <div class="card-body row" v-for="app in searchResults.applications" :key="app.application_id">

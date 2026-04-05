@@ -9,6 +9,7 @@
             <div class="students col-md-5 mb-2" v-for="drive in active_drives" :key="drive.drive_id">
                 <div class="col-12">
                     <div class="card">
+                        <span class="badge rounded-pill bg-danger top-0 end-0 m-2 position-absolute">{{ drive.post_status }}</span>
                         <h5 class="card-header bg-info">🎫{{ drive.job_title }}</h5>
                         <div class="card-body row gap-2">
                             <span class="card-text col-4">🎯{{ drive.type }}</span>
@@ -29,6 +30,7 @@
             <div class="applications col-md-5 mb-3" v-for="app in applications" :key="app.app_id">
                 <div class="col-12">
                     <div class="card">
+                        <span class="badge rounded-pill bg-danger top-0 end-0 m-2 position-absolute">{{ app.status }}</span>
                         <h5 class="card-header bg-info">🎫{{ app.job_title }}</h5>
                         <div class="card-body row gap-2">
                             <span class="card-text col-4">🎯{{ app.type }}</span>
