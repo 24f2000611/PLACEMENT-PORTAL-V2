@@ -145,30 +145,6 @@ class Interview(Resource):
             })
         return result,200
 
-class OfferLetter(Resource):
-    @login_required
-
-    @roles_required('student')
-    @auth_token_required
-    def get(self):
-        placement = Placement.query.filter_by(student_id=current_user.id).all()
-        if not placement:
-            return {"message":"No Offer Letters Yet"},401
-        
-        result = []
-        for offer in placement:
-            result.append({
-                "company_name":offer.drive.company.user_comp.username,
-                "industry":offer.drive.company.industry,
-                "package_offered":offer.package_offered,
-                "joining_date": offer.joining_date.strftime("%Y-%m-%dT%H:%M") if offer.joining_date else "TBD",  
-                "location":offer.drive.location,
-                "type":offer.drive.type,
-                "description":offer.description
-
-
-            })
-        return result ,200
 
 
 class Search(Resource):

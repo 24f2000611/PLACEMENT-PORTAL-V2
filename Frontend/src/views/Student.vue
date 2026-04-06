@@ -12,7 +12,8 @@
                         <span class="badge rounded-pill bg-danger top-0 end-0 m-2 position-absolute">{{ drive.post_status }}</span>
                         <h5 class="card-header bg-info">🎫{{ drive.job_title }}</h5>
                         <div class="card-body row gap-2">
-                            <span class="card-text col-4">🎯{{ drive.type }}</span>
+                            <span class="card-text col-3">{{ drive.company_name }}</span>
+                            <span class="card-text col-3">🎯{{ drive.type }}</span>
                             <span class="card-text col-4">💸{{ drive.salary }}</span>
                             <span class="card-text col-4">📍{{ drive.location}}</span>
                             <span class="card-text col-4">⏱️{{ drive.app_deadline}}</span>
@@ -33,6 +34,7 @@
                         <span class="badge rounded-pill bg-danger top-0 end-0 m-2 position-absolute">{{ app.status }}</span>
                         <h5 class="card-header bg-info">🎫{{ app.job_title }}</h5>
                         <div class="card-body row gap-2">
+                            <span class="card-text col-3">{{ app.company_name }}</span>
                             <span class="card-text col-4">🎯{{ app.type }}</span>
                             <span class="card-text col-4">💸{{ app.salary }}</span>
                             <span class="card-text col-4">📍{{ app.location}}</span>
@@ -41,7 +43,6 @@
                             <span class="card-text col-12">📑{{ app.description}}</span>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

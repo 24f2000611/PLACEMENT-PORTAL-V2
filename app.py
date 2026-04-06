@@ -50,7 +50,6 @@ api.add_resource(StudentRegisterAPI,'/api/student/register')
 api.add_resource(Mydashboard,'/api/student','/api/student/profile','/api/student/profile/update')
 api.add_resource(ApplyJob,'/api/student/applyjob')
 api.add_resource(Interview,'/api/student/interviews')
-api.add_resource(OfferLetter,'/api/student/offers')
 api.add_resource(Search,'/api/student/search')
 
 
@@ -67,7 +66,7 @@ api.add_resource(DeleteDrive,'/api/company/delete')
 api.add_resource(DriveStatus,'/api/company/drive-status')
 api.add_resource(UpdateAppStatus,'/api/company/drive/info/status')
 api.add_resource(DriveInfo,'/api/company/drive/info/<int:drive_id>')
-
+api.add_resource(OfferLetter,'/api/company/drive/info/offer-letter')
 
 if __name__=='__main__':
     app.run(debug=True)

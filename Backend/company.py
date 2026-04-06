@@ -183,3 +183,32 @@ class DriveStatus(Resource):
             return {"message":f"Drive status updated to {drive.post_status}"},200
         return {"message":"Drive not found"},404
 
+class OfferLetter(Resource):
+    # @login_required
+    # @auth_token_required
+    def post(self):
+        data = request.get_json()
+        app_id= data.get('app_id')
+        app = Application.query.filter_by(id=app_id).first()
+        if not app or app.status!='Selected':
+            return {"message":"Invalid application or Student not Selected"},400
+        
+        existing_offer = Placement.query.filter_by(app_id=app_id).first()
+        if existing_offer:
+            return {"message":"Offere letter already Sent"},400
+        
+        joining_date_str = data.get('joining_date')
+        parsed_date = datetime.strptime(joining_date_str, '%Y-%m-%d') if joining_date_str else None
+        
+        new_offer=Placement(
+            app_id=app_id,
+            student_id = app.student.id,
+            drive_id = app.drive_id,
+            joining_date = parsed_date,
+            package_offered = data.get('package'),
+            description= data.get('message')
+            
+        )
+        db.session.add(new_offer)
+        db.session.commit()
+        return {"message":"Offer Letter sent successfully"},200

@@ -101,3 +101,5 @@ class Placement(db.Model):
     package_offered = db.Column(db.Integer)
     interview_date = db.Column(db.DateTime,nullable=True)
     description = db.Column(db.String(350))
+    app_id = db.Column(db.Integer,db.ForeignKey('applications.id'))
+    application = db.relationship('Application',backref='offer_letter') 
