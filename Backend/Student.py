@@ -188,3 +188,27 @@ class Search(Resource):
 
         return output, 200
     
+
+
+class GetOffer(Resource):
+    @auth_token_required
+    @login_required
+    def get(self):
+        offers = []
+        placement = Placement.query.filter_by(student_id=current_user.id).all()
+        for p in placement:
+            offers.append({
+                "id":p.id,
+                "username":current_user.username,
+                "company_name":p.application.drive.company.user_comp.username,
+                "job_title":p.application.drive.job_title,
+                "job_desc":p.application.drive.job_desc,
+                "location":p.application.drive.company.location,
+                "hr_contact":p.application.drive.company.hr_contact,
+                "website":p.application.drive.company.website,
+                "joining_date":p.joining_date.strftime("%Y-%m-%dT%H:%M"),
+                "package_offered":p.package_offered,
+                "description":p.description,
+            })
+
+        return {"offers":offers,"message":"Offers retrieved Successfully"},200

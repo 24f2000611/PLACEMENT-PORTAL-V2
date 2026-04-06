@@ -30,7 +30,11 @@
                     <input class="form-control me-2" type="search" placeholder="Search" v-model="query" aria-label="Search"/>
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
+              
             </li>  
+            <li class="nav-item"><router-link class="nav-link" to="/student/history">My Applications</router-link></li>
+            <li class="nav-item"><router-link class="nav-link" to="/student/offer-letters">Offer Letters</router-link></li>
+
         </template>
           <template v-else>
               <li class="nav-item"><router-link class="nav-link" to="/">Home</router-link></li>

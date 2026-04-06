@@ -95,7 +95,7 @@ class Student(db.Model):
 class Placement(db.Model):
     __tablename__ = 'placements'
     id = db.Column(db.Integer,primary_key=True)
-    student_id = db.Column(db.Integer,db.ForeignKey('students.user_id'),nullable=False)
+    student_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
     drive_id = db.Column(db.Integer,db.ForeignKey('drives.drive_id'),nullable=False)
     joining_date = db.Column(db.DateTime)
     package_offered = db.Column(db.Integer)

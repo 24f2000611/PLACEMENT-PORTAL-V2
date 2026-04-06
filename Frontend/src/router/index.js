@@ -37,6 +37,16 @@ const router = createRouter({
       'name':'student-profile',
       'component':()=>import('../views/studentProfile.vue')
     },
+    {
+      'path':'/student/history',
+      'name':'student-history',
+      'component':()=>import('../views/student-History.vue')
+    },
+    {
+      'path':'/student/offer-letters',
+      'name':'offer-letters',
+      'component':()=>import('../views/Offerletters.vue')
+    },
     
 
 

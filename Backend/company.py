@@ -184,8 +184,6 @@ class DriveStatus(Resource):
         return {"message":"Drive not found"},404
 
 class OfferLetter(Resource):
-    # @login_required
-    # @auth_token_required
     def post(self):
         data = request.get_json()
         app_id= data.get('app_id')
@@ -202,7 +200,7 @@ class OfferLetter(Resource):
         
         new_offer=Placement(
             app_id=app_id,
-            student_id = app.student.id,
+            student_id = app.student_id,
             drive_id = app.drive_id,
             joining_date = parsed_date,
             package_offered = data.get('package'),
