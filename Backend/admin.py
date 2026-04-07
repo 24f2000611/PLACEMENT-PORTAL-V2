@@ -1,13 +1,18 @@
 from flask_restful import Resource
 from flask import request,jsonify , make_response
 from Backend.user_datastore import user_datastore
-from flask_security import utils,auth_token_required,roles_required,login_required
+from flask_security import utils,auth_token_required,roles_required,login_required,current_user
 from Backend.models import *
+from Backend.cache import cache 
 
+
+def dynamic_admin_key(*args,**kwargs):
+    return f"admin_dash_{current_user.id}"
 
 class DashBoardInfo(Resource):
-    @auth_token_required
     @roles_required('admin')
+    @auth_token_required
+    @cache.cached(timeout=10,make_cache_key=dynamic_admin_key)
     def get(self):
         stats = {
             "TotalStudents":Student.query.count(),
@@ -127,9 +132,10 @@ class Approvals(Resource):
 
         if target_type == 'Company':
             target = Company.query.filter_by(company_id=target_id).first()
+            cache.delete(f"company_id_{target.company_id}")
         else:
             target = PlacementDrive.query.filter_by(drive_id=target_id).first()
-
+            cache.delete(f"company_id_{target.c_id}")
 
         if target:
             if target.approve_status=='Pending':
@@ -138,7 +144,13 @@ class Approvals(Resource):
                 target.approve_status='Approved'
         
             db.session.commit() 
+            cache.delete(f"admin_dash_{current_user.id}")
+            cache.delete('active_drives')
 
+            if target_type=='Company':
+                cache.delete(f"company_id_{target.company_id}")
+            else:
+                cache.delete(f"company_id_{target.c_id}")
             return {
                 "message":f"Status Updated to :{target.approve_status}",
                 "messageType":"success"
@@ -163,6 +175,9 @@ class Delete(Resource):
         if target:
             db.session.delete(target)
             db.session.commit()
+
+            cache.delete(f"admin_dash_{current_user.id}")
+            cache.delete("active_drives")
             return {"message":f"{type} Deleted Successfuly"},200
         return {"message":"Not found"},404
 

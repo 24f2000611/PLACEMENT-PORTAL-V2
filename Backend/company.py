@@ -4,10 +4,16 @@ from Backend.user_datastore import user_datastore
 from flask_security import utils,auth_token_required,roles_required,login_required,current_user
 from flask_security.utils import hash_password,verify_password
 from Backend.models import *
+from Backend.cache import cache 
+
+
+def dynamic_company_key(*args,**kwargs):
+    return f"company_id_{current_user.id}"
 
 class Dashboard(Resource):
     @login_required
     @auth_token_required
+    @cache.cached(timeout=300,make_cache_key=dynamic_company_key)
     def get(self):
         user = current_user
         company= user.company_profile
@@ -70,6 +76,7 @@ class Dashboard(Resource):
                 company.website =  user_info['website']
             
         db.session.commit()
+        cache.delete(f"company_id_{current_user.id}")
         return {"message":"Company details updated successfully"},200
     
 
@@ -96,6 +103,8 @@ class PostJob(Resource):
         )
         db.session.add(new_drive)
         db.session.commit()
+        cache.delete(f"company_id_{current_user.id}")
+        cache.clear()
         return {"message":"Drive created successfuly,it will be visible after admin's approval"},201
         
 
@@ -108,6 +117,8 @@ class DeleteDrive(Resource):
         if(drive):
             db.session.delete(drive)
             db.session.commit()
+            cache.delete(f"company_id_{current_user.id}")
+            cache.delete("active_drives")
             return {"message":"Drive deleted Successfully"},200
         else:
             return {"message":"Drive could not be deleted"},400
@@ -140,7 +151,7 @@ class DriveInfo(Resource):
                 "skill":s.student.skill,
                 "description":s.student.description,
                 "status":s.status,
-                "date_applied":s.date_applied.strftime("d-%m-%YT%H:%M")
+                "date_applied":s.date_applied.strftime("%d-%m-%YT%H:%M")
                 
             })
         return {"drive_det":drive_det,"stu_appli":students},200
@@ -164,6 +175,8 @@ class UpdateAppStatus(Resource):
             else:
                 app.status='Applied'
             db.session.commit()
+            cache.delete(f"company_id_{current_user.id}") 
+            cache.delete(f"student_dash_{app.student_id}")
             return {"message":f"Application status updated to: {app.status}"},200
         return {"message":"Application cannot be updated"},404
     
@@ -180,6 +193,8 @@ class DriveStatus(Resource):
             else:
                 drive.post_status='Active'
             db.session.commit()
+            cache.delete('active_drives')
+            cache.delete(f"company_id_{current_user.id}") 
             return {"message":f"Drive status updated to {drive.post_status}"},200
         return {"message":"Drive not found"},404
 
@@ -209,4 +224,5 @@ class OfferLetter(Resource):
         )
         db.session.add(new_offer)
         db.session.commit()
+        cache.delete(f"student_offers_{app.student_id}")
         return {"message":"Offer Letter sent successfully"},200

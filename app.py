@@ -6,12 +6,13 @@ from Backend.user_datastore import user_datastore
 from flask_restful import Api 
 from flask_cors import CORS
 
-
+from Backend.cache import cache
 
 def create_app():
     app =Flask(__name__)
     app.config.from_object(Config)
     db.init_app(app)
+    cache.init_app(app)
 
     security = Security(app,user_datastore)
     api = Api(app)

@@ -1,16 +1,19 @@
 from flask_restful import Resource
 from flask import request,jsonify , make_response
 from Backend.user_datastore import user_datastore
-from flask_security import utils,auth_token_required,roles_required,login_required
+from flask_security import utils,auth_token_required,roles_required,login_required,current_user
 from Backend.models import *
-from flask_security import current_user
 from flask_security.utils import hash_password,verify_password
+from Backend.cache import cache
 
+def dynamic_student_key(*args,**kwargs):
+    return f"student_dash_{current_user.id}"
 
 class Mydashboard(Resource):
     @login_required
     @auth_token_required
     @roles_required('student')
+    @cache.cached(timeout=10,make_cache_key=dynamic_student_key)
     def get(self):
         user = current_user
         student = user.student_profile
@@ -91,6 +94,8 @@ class Mydashboard(Resource):
                 student.description = user_info['description'] 
 
         db.session.commit()
+        cache.delete(f"student_dash_{current_user.id}")
+
         return {"message":"Profile updated successfully"},200
 
 
@@ -117,6 +122,10 @@ class ApplyJob(Resource):
         new_application = Application(student_id =current_user.id,drive_id= drive_id,app_id=current_user.student_profile.id)
         db.session.add(new_application)
         db.session.commit()
+
+        cache.delete(f"student_dash_{current_user.id}")
+        cache.delete(f"company_id_{drive.c_id}")
+
         return {"message":"Application submitted successfully"},200
 
 
