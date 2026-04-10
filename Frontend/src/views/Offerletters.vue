@@ -11,16 +11,17 @@
                 <div class="col-12">
                     <div class="card">
                         <h5 class="card-header bg-info">🎫{{ offer.username }}</h5>
-                        <div class="card-body row gap-3">
-                            <span class="card-text col-3">{{ offer.company_name }}</span>
-                            <span class="card-text col-5">🎯{{ offer.job_title }}</span>
-                            <span class="card-text col-3">💸{{ offer.package_offered }}</span>
-                            <span class="card-text col-5">📍{{ offer.location}}</span>
-                            <span class="card-text col-4">📑{{ offer.website}}</span>
-                            <span class="card-text col-4">📑{{ offer.hr_contact}}</span>
-                            <span class="card-text col-4">📋{{ offer.joining_date}}</span>
-                            <span class="card-text col-5">📑{{ offer.description}}</span>
-                            <span class="card-text col-5">⏱️{{ offer.job_desc}}</span>
+                        <div class="card-body row gap-3 p-2">
+                            <span class="card-text col-5 ">Name : {{ offer.company_name }}</span>
+                            <span class="card-text col-4 ">🎯Title : {{ offer.job_title }}</span>
+                            <span class="card-text col-4 ">💸Package: {{ offer.package_offered }}</span>
+                            <span class="card-text col-4 ">📍Location :{{ offer.location}}</span>
+                            <span class="card-text col-5 ">📑Website : {{ offer.website}}</span>
+                            <span class="card-text col-5 ">📑HR Contact{{ offer.hr_contact}}</span>
+                            <span class="card-text col-5 ">📋Joining Date: {{ offer.joining_date}}</span>
+                            <span class="card-text col-5 ">⏱️Interview Date :{{ offer.interview_date}}</span>
+                            <span class="card-text col-5 ">📑Offer Description: {{ offer.description}}</span>
+                            <span class="card-text col-5 ">Job Description :{{ offer.job_desc}}</span>
                         </div>
                     </div>
                 </div>

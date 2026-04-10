@@ -316,8 +316,7 @@ export default{
                             <span class="card-text col-4">🎯{{ app.type}}</span>
                             <span class="card-text col-4">⏱️{{ app.date_applied}}</span>
                             <span class="card-text col-8">📑{{ app.description}}</span>
-                            <div class="col-md-2 end-0 bottom-0 position-absolute mx-4">
-
+                            <div class="col-md-2 end-0 bottom-0 position-absolute mx-4 p-2">
                                 <span><button class="btn btn-danger end-0" @click="handleDelete(app.application_id,'Application')">Delete</button></span>
                             </div>
                         </div>

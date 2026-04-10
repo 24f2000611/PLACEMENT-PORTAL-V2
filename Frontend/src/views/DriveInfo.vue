@@ -54,6 +54,12 @@
                     <label class="form-label fw-bold">Expected Joining Date</label>
                     <input type="date" class="form-control" v-model="activeOffer.joining_date">
                 </div>
+
+                 <div class="mb-3">
+                    <label class="form-label fw-bold">Interveiw Date</label>
+                    <input type="date" class="form-control" v-model="activeOffer.interview_date">
+                </div>
+
                 <div class="mb-3">
                     <label class="form-label fw-bold">Additional Message/Remarks</label>
                     <textarea class="form-control" v-model="activeOffer.message" rows="3" placeholder="Welcome to the team!"></textarea>
@@ -76,7 +82,7 @@ export default{
         return{
             "stu_appli":[],
             "drive_det":{job_title:'',job_desc:'',eligibility:'',app_deadline:'',location:'',type:'',salary:'',post_status:'',date_applied:''},
-            "activeOffer":{app_id:null,username:'',package:'',joining_date:'',job_title:'',job_desc:'',message:''},
+            "activeOffer":{app_id:null,username:'',package:'',joining_date:'',job_title:'',job_desc:'',interview_date:'',message:''},
             "message":'',
             "messageType":''
         }
@@ -144,8 +150,8 @@ export default{
                         "package":this.activeOffer.package,
                         "message":this.activeOffer.message,
                         "username":this.activeOffer.username,
-                        "joining_date":this.activeOffer.joining_date
-
+                        "joining_date":this.activeOffer.joining_date,
+                        "interview_date":this.activeOffer.interview_date
 
                     }),
                 });

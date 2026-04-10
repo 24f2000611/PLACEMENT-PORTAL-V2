@@ -45,7 +45,7 @@ class UserRoles(db.Model):
 class PlacementDrive(db.Model):
     __tablename__='drives'
     drive_id= db.Column(db.Integer,primary_key =True)
-    c_id = db.Column(db.Integer,db.ForeignKey('company.company_id'),nullable=False,unique=False)
+    c_id = db.Column(db.Integer,db.ForeignKey('company.company_id',ondelete="CASCADE"),nullable=False,unique=False)
     job_title = db.Column(db.String(100),nullable=False)
     job_desc = db.Column(db.Text,nullable=False)
     eligibility = db.Column(db.String(100),nullable=False)
@@ -62,9 +62,9 @@ class PlacementDrive(db.Model):
 class Application(db.Model):
     __tablename__ = 'applications'
     id = db.Column(db.Integer,primary_key=True)
-    student_id = db.Column(db.Integer,db.ForeignKey('users.id'))
-    app_id = db.Column(db.Integer,db.ForeignKey('students.id'))
-    drive_id = db.Column(db.Integer,db.ForeignKey('drives.drive_id'))
+    student_id = db.Column(db.Integer,db.ForeignKey('users.id',ondelete='CASCADE'))
+    app_id = db.Column(db.Integer,db.ForeignKey('students.id',ondelete='CASCADE'))
+    drive_id = db.Column(db.Integer,db.ForeignKey('drives.drive_id',ondelete='CASCADE'))
     date_applied = db.Column(db.DateTime,default=datetime.utcnow)
     status = db.Column(db.String(30),default='Applied') # applied ,rejected, selected, shorlisted,interview
 
@@ -95,11 +95,11 @@ class Student(db.Model):
 class Placement(db.Model):
     __tablename__ = 'placements'
     id = db.Column(db.Integer,primary_key=True)
-    student_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
-    drive_id = db.Column(db.Integer,db.ForeignKey('drives.drive_id'),nullable=False)
+    student_id = db.Column(db.Integer,db.ForeignKey('users.id',ondelete='CASCADE'),nullable=False)
+    drive_id = db.Column(db.Integer,db.ForeignKey('drives.drive_id',ondelete='CASCADE'),nullable=False)
     joining_date = db.Column(db.DateTime)
     package_offered = db.Column(db.Integer)
     interview_date = db.Column(db.DateTime,nullable=True)
     description = db.Column(db.String(350))
-    app_id = db.Column(db.Integer,db.ForeignKey('applications.id'))
-    application = db.relationship('Application',backref='offer_letter') 
+    app_id = db.Column(db.Integer,db.ForeignKey('applications.id',ondelete='CASCADE'))
+    application = db.relationship('Application',backref=db.backref('offer_letter',cascade='all, delete-orphan')) 

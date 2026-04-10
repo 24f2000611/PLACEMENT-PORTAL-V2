@@ -211,15 +211,20 @@ class OfferLetter(Resource):
             return {"message":"Offere letter already Sent"},400
         
         joining_date_str = data.get('joining_date')
-        parsed_date = datetime.strptime(joining_date_str, '%Y-%m-%d') if joining_date_str else None
+        joining_date_parse = datetime.strptime(joining_date_str, '%Y-%m-%d') if joining_date_str else None
         
+        interview_date_str = data.get('interview_date')
+        interveiw_date_parse = datetime.strptime(interview_date_str, '%Y-%m-%d') if interview_date_str else None
+        
+
         new_offer=Placement(
             app_id=app_id,
             student_id = app.student_id,
             drive_id = app.drive_id,
-            joining_date = parsed_date,
+            joining_date = joining_date_parse,
             package_offered = data.get('package'),
-            description= data.get('message')
+            description= data.get('message'),
+            interview_date = interveiw_date_parse
             
         )
         db.session.add(new_offer)

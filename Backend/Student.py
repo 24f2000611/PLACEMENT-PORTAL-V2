@@ -6,6 +6,8 @@ from Backend.models import *
 from flask_security.utils import hash_password,verify_password
 from Backend.cache import cache
 
+
+
 def dynamic_student_key(*args,**kwargs):
     return f"student_dash_{current_user.id}"
 
@@ -24,24 +26,31 @@ class Mydashboard(Resource):
             "skill":student.skill,
             "description":student.description
         }
-    
+
         applications = []
         for app in student.applications:
+            interview_time='No interview scheduled'
+            if app.status=='Interview':
+                if app.offer_letter:
+                    placement_record = app.offer_letter[0]
+                    if placement_record.interview_date:
+                        interview_time = placement_record.interview_date.strftime("%Y-%m-%dT%H:%M")
             applications.append({
-                "app_id":app.app_id,
-                "job_title":app.drive.job_title,
-                "eligibility":app.drive.eligibility,
-                "description":app.drive.job_desc,
-                "salary":app.drive.salary,
-                "type":app.drive.type,
-                "location":app.drive.location,
-                "company_name":app.drive.company.user_comp.username,
-                "industry":app.drive.company.industry,
-                "status":app.status,
-                "app_deadline":app.drive.app_deadline.strftime("%Y-%m-%dT%H:%M"),
-                "date_applied":app.date_applied.strftime("%Y-%m-%dT%H:%M")
+                            "app_id":app.app_id,
+                            "job_title":app.drive.job_title,
+                            "eligibility":app.drive.eligibility,
+                            "description":app.drive.job_desc,
+                            "salary":app.drive.salary,
+                            "type":app.drive.type,
+                            "location":app.drive.location,
+                            "company_name":app.drive.company.user_comp.username,
+                            "industry":app.drive.company.industry,
+                            "status":app.status,
+                            "app_deadline":app.drive.app_deadline.strftime("%Y-%m-%dT%H:%M"),
+                            "date_applied":app.date_applied.strftime("%Y-%m-%dT%H:%M"),
+                            "interview_date":interview_time
 
-            })
+                        })         
 
         active_drives = []
         for d in PlacementDrive.query.filter_by(approve_status='Approved').all():
@@ -110,7 +119,9 @@ class ApplyJob(Resource):
         drive = PlacementDrive.query.get(drive_id)
         if not drive:
             return {"message":"Placement Drive not found"},404
-        
+        if drive.post_status =='Closed':
+            return {"message":"The drive is not accepting applications"},400
+
         if drive.app_deadline < datetime.utcnow():
             return {"message":"Application deadline has passed"},400
             
@@ -153,8 +164,6 @@ class Interview(Resource):
 
             })
         return result,200
-
-
 
 class Search(Resource):
     @login_required
@@ -215,9 +224,26 @@ class GetOffer(Resource):
                 "location":p.application.drive.company.location,
                 "hr_contact":p.application.drive.company.hr_contact,
                 "website":p.application.drive.company.website,
-                "joining_date":p.joining_date.strftime("%Y-%m-%dT%H:%M"),
+                "joining_date":p.joining_date.strftime("%Y-%m-%dT%H:%M") if p.joining_date else "Pending",
                 "package_offered":p.package_offered,
                 "description":p.description,
+                "interview_date":p.interview_date.strftime("%Y-%m-%dT%H:%M") if p.interview_date else "Not Scheduled"
             })
 
         return {"offers":offers,"message":"Offers retrieved Successfully"},200
+    
+
+
+class ExportStatus(Resource):
+    @login_required
+    @auth_token_required
+    def get(self,task_id):
+        from celery.result import AsyncResult
+        task = AsyncResult(task_id)
+
+        if task.state =="PENDING":
+            return {"status":"Processing"},202
+        elif task.state =='SUCCESS':
+            return {"status":"Ready","file_url":f"/download/{task_id}"},200
+        else:
+            return {"status":"Failed"},500
