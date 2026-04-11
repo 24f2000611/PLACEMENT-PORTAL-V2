@@ -34,7 +34,7 @@ class Mydashboard(Resource):
                 if app.offer_letter:
                     placement_record = app.offer_letter[0]
                     if placement_record.interview_date:
-                        interview_time = placement_record.interview_date.strftime("%Y-%m-%dT%H:%M")
+                        interview_time = placement_record.interview_date.strftime("%d-%m-%Y")
             applications.append({
                             "app_id":app.app_id,
                             "job_title":app.drive.job_title,
@@ -46,8 +46,8 @@ class Mydashboard(Resource):
                             "company_name":app.drive.company.user_comp.username,
                             "industry":app.drive.company.industry,
                             "status":app.status,
-                            "app_deadline":app.drive.app_deadline.strftime("%Y-%m-%dT%H:%M"),
-                            "date_applied":app.date_applied.strftime("%Y-%m-%dT%H:%M"),
+                            "app_deadline":app.drive.app_deadline.strftime("%d-%m-%Y"),
+                            "date_applied":app.date_applied.strftime("%d-%m-%Y"),
                             "interview_date":interview_time
 
                         })         
@@ -62,7 +62,7 @@ class Mydashboard(Resource):
                 "salary":d.salary,
                 "type":d.type,
                 "location":d.location,
-                "app_deadline":d.app_deadline.strftime("%Y-%m-%dT%H:%M"),
+                "app_deadline":d.app_deadline.strftime("%d-%m-%Y"),
                 "eligibility":d.eligibility,
                 "post_status":d.post_status
 
@@ -160,7 +160,7 @@ class Interview(Resource):
                 "company_name":offer.drive.company.user_comp.username,
                 "industry":offer.drive.company.industry,
                 "package_offered":offer.package_offered,
-                "interview_date":offer.interview_date.strftime("%Y-%m-%dT%H:%M")
+                "interview_date":offer.interview_date.strftime("%d-%m-%Y")
 
             })
         return result,200
@@ -201,7 +201,7 @@ class Search(Resource):
                 "company_name": drive.company.user.username,
                 "location": drive.location,
                 "salary": drive.salary,
-                "deadline": drive.app_deadline.strftime("%Y-%m-%dT%H:%M") if drive.app_deadline else None
+                "deadline": drive.app_deadline.strftime("%d-%m-%Y") if drive.app_deadline else None
             })
 
         return output, 200
@@ -224,10 +224,10 @@ class GetOffer(Resource):
                 "location":p.application.drive.company.location,
                 "hr_contact":p.application.drive.company.hr_contact,
                 "website":p.application.drive.company.website,
-                "joining_date":p.joining_date.strftime("%Y-%m-%dT%H:%M") if p.joining_date else "Pending",
+                "joining_date":p.joining_date.strftime("%d-%m-%Y") if p.joining_date else "Pending",
                 "package_offered":p.package_offered,
                 "description":p.description,
-                "interview_date":p.interview_date.strftime("%Y-%m-%dT%H:%M") if p.interview_date else "Not Scheduled"
+                "interview_date":p.interview_date.strftime("%d-%m-%Y") if p.interview_date else "Not Scheduled"
             })
 
         return {"offers":offers,"message":"Offers retrieved Successfully"},200

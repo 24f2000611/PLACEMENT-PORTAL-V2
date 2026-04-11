@@ -60,7 +60,6 @@ api.add_resource(StudentRegisterAPI,'/api/student/register')
 
 api.add_resource(Mydashboard,'/api/student','/api/student/profile','/api/student/profile/update')
 api.add_resource(ApplyJob,'/api/student/applyjob')
-api.add_resource(Interview,'/api/student/interviews')
 api.add_resource(Search,'/api/student/search')
 api.add_resource(GetOffer,'/api/student/offer-letters')
     

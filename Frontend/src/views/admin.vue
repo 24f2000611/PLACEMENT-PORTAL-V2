@@ -228,18 +228,18 @@ export default{
     <div v-else>
         <!-- registerd students -->
         <h2 class="text-center">Registered Students</h2> 
-        <div class="row">
-            <div class="students col-md-6" v-for="student in reg_students" :key="student.id">
+        <div class="row d-flex gap-3">
+            <div class="students col-md-5" v-for="student in reg_students" :key="student.id">
                 <div class="col-12">
                     <div class="card">
                         <h5 class="card-header bg-info">{{ student.username }}</h5>
-                        <div class="card-body row gap-3">
+                        <div class="card-body row gap-2">
                             <span class="card-text col-4">📧 {{ student.email }}</span>
                             <span class="card-text col-6">⚡{{ student.skill}}</span>
                             <span class="card-text col-4">🎓{{ student.education }}</span>
                             <span class="card-text col-6">📑{{ student.description}}</span>
 
-                            <div class="col-md-2 position-absolute end-0 bottom-0 p-3">
+                            <div class="col-md-2 position-absolute end-0 bottom-0 p-3 mx-2">
                                 <span><button class="btn btn-danger" @click="handleDelete(student.id,'Student')">Delete</button></span>
                             </div>
                         </div>              
@@ -304,10 +304,13 @@ export default{
         <!-- active application -->
         <h2 class="text-center">Applications</h2>
         <div class="row">
-            <div class="Applications col-md-4" v-for="app in applications" :key="app.application_id">
+            <div class="Applications col-md-5" v-for="app in applications" :key="app.application_id">
                 <div class="col-12">
                     <div class="card">
-                        <h5 class="card-header bg-info">🎫{{ app.job_title }}</h5>
+                        <div class="card-header bg-info">
+                            <span class="badge text-bg-primary position-absolute top-0 px-1 m-3 end-0">{{ app.app_status }}</span>
+                            <h5> 🎫{{ app.job_title }}</h5>
+                        </div>
                         <div class="card-body  row gap-3">
                             <span class="card-text col-3">🧑‍🎓{{ app.student_name }}</span>
                             <span class="card-text col-3">🏢{{ app.company_name }}</span>

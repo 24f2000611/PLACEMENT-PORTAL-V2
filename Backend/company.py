@@ -35,7 +35,7 @@ class Dashboard(Resource):
                     "job_title":d.job_title,
                     "job_desc":d.job_desc,
                     "eligibility":d.eligibility,
-                    "app_deadline":d.app_deadline.strftime("%d-%m-%Y %H:%M"),
+                    "app_deadline":d.app_deadline.strftime("%d-%m-%Y"),
                     "location":d.location,
                     "type":d.type,
                     "salary":d.salary,
@@ -88,7 +88,7 @@ class PostJob(Resource):
         company = current_user.company_profile
 
         deadline_str = job_details.get('app_deadline')
-        parsed_deadline = datetime.strptime(deadline_str, "%Y-%m-%dT%H:%M").date() if deadline_str else None    
+        parsed_deadline = datetime.strptime(deadline_str, "%Y-%m-%d").date() if deadline_str else None    
         
         new_drive=  PlacementDrive(
             job_title = job_details.get('job_title'),
@@ -133,7 +133,7 @@ class DriveInfo(Resource):
                     "job_title":drive.job_title,
                     "job_desc":drive.job_desc,
                     "eligibility":drive.eligibility,
-                    "app_deadline":drive.app_deadline.strftime("%d-%m-%YT%H:%M"),
+                    "app_deadline":drive.app_deadline.strftime("%d-%m-%Y"),
                     "location":drive.location,
                     "type":drive.type,
                     "salary":drive.salary,
@@ -151,7 +151,7 @@ class DriveInfo(Resource):
                 "skill":s.student.skill,
                 "description":s.student.description,
                 "status":s.status,
-                "date_applied":s.date_applied.strftime("%d-%m-%YT%H:%M")
+                "date_applied":s.date_applied.strftime("%d-%m-%Y")
                 
             })
         return {"drive_det":drive_det,"stu_appli":students},200

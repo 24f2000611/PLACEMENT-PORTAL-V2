@@ -60,7 +60,8 @@ class DashBoardInfo(Resource):
                 "location":drive_obj.location,
                 "salary":drive_obj.salary,
                 "type":drive_obj.type,
-                "date_applied":a.date_applied.strftime("%Y-%m-%d")
+                "date_applied":a.date_applied.strftime("%d-%m-%Y"),
+                "app_status":a.status
 
             })
 
@@ -71,7 +72,7 @@ class DashBoardInfo(Resource):
                 "job_title":d.job_title,
                 "job_desc":d.job_desc,
                 "eligibility":d.eligibility,
-                "app_deadline":d.app_deadline.strftime("%Y-%m-%d"),
+                "app_deadline":d.app_deadline.strftime("%d-%m-%Y"),
                 "location":d.location,
                 "type":d.type,
                 "salary":d.salary,
@@ -116,7 +117,7 @@ class Approvals(Resource):
                 "approve_status":d.approve_status,
                 "salary":d.salary,
                 "type":d.type,
-                "app_deadline":d.app_deadline.strftime("%Y-%m-%dT%H:%M"),
+                "app_deadline":d.app_deadline.strftime("%Y-%m-%d"),
                 "location":d.location,
                 "industry":d.company.industry
             })
@@ -234,7 +235,7 @@ class AdminSearch(Resource):
                     "approve_status":d.approve_status,
                     "salary":d.salary,
                     "type":d.type,
-                    "app_deadline":d.app_deadline.strftime("%Y-%m-%dT%H:%M"),
+                    "app_deadline":d.app_deadline.strftime("%d-%m-%Y"),
                     "location":d.location,
                     "industry":d.company.industry  
                 }for d in drives],
@@ -247,7 +248,7 @@ class AdminSearch(Resource):
                         "location":a.drive.location,
                         "salary":a.drive.salary,
                         "type":a.drive.type,
-                        "date_applied":a.date_applied.strftime("%Y-%m-%d")
+                        "date_applied":a.date_applied.strftime("%d-%m-%Y")
                 }for a in apps]
             }
         },200

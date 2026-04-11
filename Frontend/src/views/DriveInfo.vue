@@ -38,6 +38,7 @@
     </div>
 </div>
 
+<!-- Modal for sending the job offer -->
 <div class="modal fade" id="offerModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -17,7 +17,7 @@
                             <span class="card-text col-4 ">💸Package: {{ offer.package_offered }}</span>
                             <span class="card-text col-4 ">📍Location :{{ offer.location}}</span>
                             <span class="card-text col-5 ">📑Website : {{ offer.website}}</span>
-                            <span class="card-text col-5 ">📑HR Contact{{ offer.hr_contact}}</span>
+                            <span class="card-text col-5 ">📑HR Contact: {{ offer.hr_contact}}</span>
                             <span class="card-text col-5 ">📋Joining Date: {{ offer.joining_date}}</span>
                             <span class="card-text col-5 ">⏱️Interview Date :{{ offer.interview_date}}</span>
                             <span class="card-text col-5 ">📑Offer Description: {{ offer.description}}</span>

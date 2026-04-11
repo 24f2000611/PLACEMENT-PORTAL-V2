@@ -140,7 +140,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                   <label class="form-label">Application Deadline</label>
-                  <input type="datetime-local" class="form-control" v-model="newjob.app_deadline" required>
+                  <input type="date" class="form-control" v-model="newjob.app_deadline" required>
                 </div>
               </div>
 

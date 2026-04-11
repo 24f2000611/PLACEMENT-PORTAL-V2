@@ -16,12 +16,11 @@ def send_interview_reminders():
         student_email = interview.application.student.user_stu.email
         student_name = interview.application.student.user_stu.username
         company_name= interview.application.drive.company.user_comp.username
-        time_formatted = interview.interview_date.strftime("%I:%M %p")
 
         msg = Message(
             subject = f"Reminder:Interview with {company_name} Tomorrow !",
             recipients= [student_email],
-            body =f"Hello \n\nThis is a reminder that you have an interview scheduled with {company_name} tomorrow at {time_formatted}.Role:{interview.application.drive.job_title} Location:{interview.application.drive.location}",
+            body =f"Hello \n\nThis is a reminder that you have an interview scheduled with {company_name} tomorrow .Role:{interview.application.drive.job_title} Location:{interview.application.drive.location}",
 
         )
         mail.send(msg)
