@@ -33,7 +33,7 @@ class DashBoardInfo(Resource):
                 "description":s.description
                 # "location":s.location,
             })
-            reg_students.sort(key=lambda x : x['username'].tolower())
+            reg_students.sort(key=lambda x : x['username'].lower())
 
         reg_companies = []
         for c in Company.query.all():
