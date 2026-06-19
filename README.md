@@ -1,13 +1,14 @@
-🎓 Campus Placement Portal API [Placement Portal](https://placement-portal-4fe6.onrender.com)
+# 🎓 [Campus Placement Portal API](https://placement-portal-4fe6.onrender.com)
 
-📖 The Problem
+# 📖 The Problem
 
-Institutes require efficient systems to manage campus recruitment activities involving companies and students. Currently, many institutes rely on fragmented spreadsheets, email threads, or manual coordination. This creates massive administrative bottlenecks and makes it difficult to securely manage company approvals, coordinate placement drives, handle student registrations, and track application statuses.
-💡 The Solution
+## Institutes require efficient systems to manage campus recruitment activities involving companies and students. Currently, many institutes rely on fragmented spreadsheets, email threads, or manual coordination. This creates massive administrative bottlenecks and makes it difficult to securely manage company approvals, coordinate placement drives, handle student registrations, and track application statuses.
 
-This monolithic full-stack application digitizes and automates the entire recruitment lifecycle. It provides a secure, role-based platform where administrators can vet companies, employers can post job drives, and students can apply to opportunities seamlessly through a unified dashboard.
+# 💡 The Solution
 
-🛠️ Technical Architecture
+## This monolithic full-stack application digitizes and automates the entire recruitment lifecycle. It provides a secure, role-based platform where administrators can vet companies, employers can post job drives, and students can apply to opportunities seamlessly through a unified dashboard.
+
+# 🛠️ Technical Architecture
 
     Frontend: Vue.js (compiled for monolith delivery)
 
