@@ -192,7 +192,7 @@ export default{
         }
     },
     async mounted(){
-      const response = await fetch('http://localhost:5000/api/company/profile',{
+      const response = await fetch('/api/company/profile',{
         method:"GET",
         headers:{'Authentication-Token':localStorage.getItem('token')}
       });
@@ -212,7 +212,7 @@ export default{
         },
         async saveProfile(){
           try{
-            const res = await fetch('http://localhost:5000/api/company/profile/update',{
+            const res = await fetch('/api/company/profile/update',{
               method:"POST",
               headers:{
                 "Content-Type":"application/json",
@@ -233,7 +233,7 @@ export default{
         },
             async post_job(){
             try{
-                const response = await fetch('http://localhost:5000/api/company/profile/post-job',{
+                const response = await fetch('/api/company/profile/post-job',{
                     method:"POST",
                     headers:{
                         "Content-Type":"application/json",

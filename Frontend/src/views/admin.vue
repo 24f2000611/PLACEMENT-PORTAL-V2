@@ -24,7 +24,7 @@ export default{
     methods:{
         async Dashboard(){
             try{
-                const response =await fetch('http://localhost:5000/api/admin',{
+                const response =await fetch('/api/admin',{
                     method:"GET",
                     headers:{
                         "Content-Type":"application/json",
@@ -46,7 +46,7 @@ export default{
         },
         async handleDelete(id,type){
             try{
-                const response = await fetch('http://localhost:5000/api/admin/delete',{
+                const response = await fetch('/api/admin/delete',{
                     method:"POST",
                     headers:{
                         "Content-Type":"application/json",
@@ -80,7 +80,7 @@ export default{
                 }
             try{
                 console.log("sending request to backend")
-                const response = await fetch("http://localhost:5000/api/admin/search",{
+                const response = await fetch("/api/admin/search",{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",

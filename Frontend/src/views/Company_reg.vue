@@ -57,7 +57,7 @@ export default{
                 email: this.registerDetails.email,
             };
             try{
-                const response = await fetch('http://localhost:5000/api/company/register',{
+                const response = await fetch('/api/company/register',{
                     method:'POST',
                     headers :{"Content-Type":"application/json"},
                     body:JSON.stringify(payload),

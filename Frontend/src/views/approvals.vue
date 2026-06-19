@@ -97,7 +97,7 @@ export default{
             return 'btn btn-success';
         },
         async fetchApprovals(){
-            const response = await fetch('http://localhost:5000/api/admin/approvals',{
+            const response = await fetch('/api/admin/approvals',{
             method:"GET",
             headers:{
                 "Authentication-Token":localStorage.getItem('token'),
@@ -109,7 +109,7 @@ export default{
             
         },
         async handleApprovals(id,type){
-        const response =  await fetch('http://localhost:5000/api/admin/approvals',{
+        const response =  await fetch('/api/admin/approvals',{
             method:"POST",
             headers:{
                 "Authentication-Token":localStorage.getItem('token'),

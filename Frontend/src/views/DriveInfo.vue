@@ -92,7 +92,7 @@ export default{
         async ShowApps(){
             const driveId = this.$route.params.id;
             try{
-                const response = await fetch(`http://localhost:5000/api/company/drive/info/${driveId}`,{
+                const response = await fetch(`/api/company/drive/info/${driveId}`,{
                     method:"GET",
                     headers:{
                         "Content-Type":"application/json",
@@ -114,7 +114,7 @@ export default{
         },
         async AppStatus(id){
             try{
-                const response = await fetch("http://localhost:5000/api/company/drive/info/status",{
+                const response = await fetch("/api/company/drive/info/status",{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",
@@ -138,7 +138,7 @@ export default{
         },
         async submitOffer(){
             try{
-                const response = await fetch('http://localhost:5000/api/company/drive/info/offer-letter',{
+                const response = await fetch('/api/company/drive/info/offer-letter',{
                     method:"POST",
                     headers:{
                         "Content-Type":"application/json",

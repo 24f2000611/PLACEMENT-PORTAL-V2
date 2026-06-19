@@ -43,7 +43,7 @@ export default{
     methods:{
         async dash(){
             try{
-                const res = await fetch('http://localhost:5000/api/student/offer-letters',{
+                const res = await fetch('/api/student/offer-letters',{
                     method:"GET",
                     headers:{
                         "Content-Type":"application/json",

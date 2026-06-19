@@ -57,7 +57,7 @@ export default{
     methods:{
         async dash(){
             try{
-                const response = await fetch('http://localhost:5000/api/company',{
+                const response = await fetch('/api/company',{
                     method:"GET",
                     headers:{
                         "Content-Type":"application/json",
@@ -77,7 +77,7 @@ export default{
         
         async driveStatus(drive_id){
             try{
-                const res = await fetch('http://localhost:5000/api/company/drive-status',{
+                const res = await fetch('/api/company/drive-status',{
                     method:"POST",
                     headers:{
                         "Content-Type":"application/json",
@@ -102,7 +102,7 @@ export default{
         },
         async deleteDrive(drive_id){
             try{
-                const response = await fetch('http://localhost:5000/api/company/delete',{
+                const response = await fetch('/api/company/delete',{
                     method:"POST",
                     headers:{
                         "Content-Type":"application/json",

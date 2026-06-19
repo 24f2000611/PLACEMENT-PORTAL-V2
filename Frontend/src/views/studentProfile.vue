@@ -73,7 +73,7 @@ export default{
         }
     },
     async mounted(){
-        const response = await fetch('http://localhost:5000/api/student/profile',{
+        const response = await fetch('/api/student/profile',{
             headers:{
                 'Authentication-Token':localStorage.getItem('token'),
             }
@@ -95,7 +95,7 @@ export default{
         },
         async saveProfile(){
             try{
-                const response = await fetch('http://localhost:5000/api/student/profile/update',{
+                const response = await fetch('/api/student/profile/update',{
                     method:"POST",
                     headers:{
                         "Content-Type":"application/json",

@@ -44,7 +44,7 @@ export default{
     methods:{
         async Dash(){
             try{
-                const response = await fetch('http://localhost:5000/api/student',{
+                const response = await fetch('/api/student',{
                     "method":"GET",
                     headers:{
                         "Content-Type":"application/json",
@@ -62,7 +62,7 @@ export default{
         },
         async applyJob(id){
             try{
-                const res = await fetch("http://localhost:5000/api/student/applyjob",{
+                const res = await fetch("/api/student/applyjob",{
                     method:"POST",
                     headers:{
                         "Content-Type":"application/json",
