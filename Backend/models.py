@@ -72,7 +72,7 @@ class Application(db.Model):
 class Company(db.Model):
     __tablename__ = 'company'
     id = db.Column(db.Integer,primary_key=True)
-    company_id = db.Column(db.Integer,db.ForeignKey('users.id',ondelete='CASCADE'))
+    company_id = db.Column(db.Integer,db.ForeignKey('users.id',ondelete='CASCADE'),unique=True)
     industry = db.Column(db.String(150),nullable=True)
     location = db.Column(db.String(150),nullable=True) 
     approve_status = db.Column(db.String(20),nullable=True,default='Pending') # pending,approved,rejected

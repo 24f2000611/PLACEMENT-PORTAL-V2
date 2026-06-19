@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 from flask import Flask , render_template
 from flask_security import Security,hash_password
 from Backend.database import db
