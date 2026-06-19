@@ -16,3 +16,4 @@ SQLAlchemy==2.0.43
 WTForms==3.2.1
 python-dotenv==1.2.1
 gunicorn
+psycopg2-binary
