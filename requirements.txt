@@ -2,11 +2,14 @@ Flask==3.1.2
 Flask-SQLAlchemy==3.1.1
 Flask-CORS==6.0.2
 Flask-Migrate==4.1.0
-Flask-Login==0.6.3
 Flask-WTF==1.2.1
 Flask-Mail==0.10.0
+Flask-Security-Too==5.7.1
+Flask-Login==0.6.3
+cryptography==45.0.5
+email-validator==2.3.0
 SQLAlchemy==2.0.43
 WTForms==3.2.1
 python-dotenv==1.2.1
-email-validator==2.3.0
 gunicorn
+psycopg2-binary
