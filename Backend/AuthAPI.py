@@ -3,6 +3,7 @@ from flask import request,jsonify , make_response
 from Backend.user_datastore import user_datastore
 from flask_security import utils,auth_token_required,roles_required ,hash_password
 from Backend.models import *
+from flask import render_template
 import uuid
 
 
@@ -133,3 +134,4 @@ class LogoutAPI(Resource):
         utils.logout_user()
         return{"message":"Logout Successfuly"},200
     
+

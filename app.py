@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask , render_template
 from flask_security import Security,hash_password
 from Backend.database import db
 from Backend.config import Config
@@ -40,7 +40,7 @@ def create_app():
     return app,api,celery
 
 app ,api,celery = create_app()
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)
+CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 
 from Backend.AuthAPI import *
 from Backend.Student import * 
@@ -55,6 +55,7 @@ api.add_resource(LoginAPI,'/api/login')
 api.add_resource(LogoutAPI,'/api/logout')
 api.add_resource(CompanyRegisterAPI,'/api/company/register')
 api.add_resource(StudentRegisterAPI,'/api/student/register')
+
 
 # student
 
@@ -78,7 +79,10 @@ api.add_resource(UpdateAppStatus,'/api/company/drive/info/status')
 api.add_resource(DriveInfo,'/api/company/drive/info/<int:drive_id>')
 api.add_resource(OfferLetter,'/api/company/drive/info/offer-letter')
 
-
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("index.html")
 
 @app.route('/api/status/<task_id>', methods=['GET'])
 def get_task_status(task_id):
