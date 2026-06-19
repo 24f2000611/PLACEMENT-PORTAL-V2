@@ -13,27 +13,27 @@ anyio==4.12.1
 attrs==25.4.0
 beautifulsoup4==4.14.3
 billiard==4.2.4
-blinker @ file:///C:/b/abs_b1i87khtob/croot/blinker_1737448732095/work
+blinker==1.9.0
 cachelib==0.13.0
 cachetools==7.1.4
 celery==5.6.2
 certifi==2026.1.4
-cffi @ file:///C:/b/abs_29_b57if3f/croot/cffi_1736184144340/work
+cffi==1.17.1
 cfgv==3.5.0
 charset-normalizer==3.4.4
-click @ file:///C:/b/abs_bbg7qqz4dk/croot/click_1754477951021/work
+click==8.2.1
 click-didyoumean==0.3.1
 click-plugins==1.1.1.2
 click-repl==0.3.0
 cloudflared==1.0.0.2
-colorama @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/colorama_1729036581634/work
+colorama==0.4.6
 contourpy==1.3.3
-cryptography @ file:///C:/b/abs_cbo_0az6za/croot/cryptography_1753084589654/work
+cryptography==45.0.5
 cycler==0.12.1
 defusedxml==0.7.1
 distlib==0.4.0
 distro==1.9.0
-dnspython @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/dnspython_1729059209941/work
+dnspython==2.4.2
 docker==7.1.0
 docstring_parser==0.17.0
 email-validator==2.3.0
@@ -46,7 +46,7 @@ fastar==0.8.0
 fastuuid==0.14.0
 ffmpeg==1.4
 filelock==3.24.2
-Flask @ file:///C:/b/abs_28dbmjidmh/croot/flask_1756453142071/work
+Flask==3.1.2
 Flask-Caching==2.3.1
 flask-cors==6.0.2
 Flask-LiveReload==0.2.2
@@ -58,7 +58,7 @@ Flask-RESTful==0.3.10
 Flask-Security==5.7.1
 Flask-Security-Too==5.7.1
 Flask-SQLAlchemy==3.1.1
-Flask-WTF @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/flask-wtf_1729090878968/work
+Flask-WTF==1.2.1
 fonttools==4.60.1
 frozenlist==1.8.0
 fsspec==2026.2.0
@@ -76,7 +76,7 @@ google-auth-httplib2==0.3.0
 google-genai==1.65.0
 google-generativeai==0.8.6
 googleapis-common-protos==1.72.0
-greenlet @ file:///C:/miniconda3/conda-bld/greenlet_1757405549674/work
+greenlet==3.2.4
 grpcio==1.78.0
 grpcio-status==1.71.2
 h11==0.16.0
@@ -87,11 +87,11 @@ httptools==0.7.1
 httpx==0.28.1
 huggingface_hub==1.4.1
 identify==2.6.19
-idna @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/idna_1729038997316/work
+idna==3.7
 imagekitio==5.6.0
 importlib_metadata==8.7.1
-itsdangerous @ file:///C:/Users/dev-admin/buildout/croot/itsdangerous_1732929022589/work
-Jinja2 @ file:///C:/b/abs_920kup4e6u/croot/jinja2_1741711580669/work
+itsdangerous==2.2.0
+Jinja2==3.1.6
 jiter==0.13.0
 joblib==1.5.3
 jsonschema==4.26.0
@@ -102,19 +102,19 @@ libpass==1.9.3
 litellm==1.81.16
 Mako==1.3.10
 markdown-it-py==4.0.0
-MarkupSafe @ file:///C:/b/abs_a0ma7ge0jc/croot/markupsafe_1738584052792/work
+MarkupSafe==3.0.2
 matplotlib==3.10.7
 mdurl==0.1.2
+mkl_fft==2.1.1
+mkl_random==1.3.0
 mkl-service==2.5.2
-mkl_fft @ file:///C:/miniconda3/conda-bld/mkl_fft_1761592916781/work
-mkl_random @ file:///C:/miniconda3/conda-bld/mkl_random_1761593076691/work
 mpmath==1.3.0
 multidict==6.7.1
 narwhals==2.21.2
 networkx==3.6.1
 ngrok==1.7.0
 nodeenv==1.10.0
-numpy @ file:///C:/Users/task_177073258984462/croot/numpy_and_numpy_base_1770732696956/work/dist/numpy-2.4.2-cp313-cp313-win_amd64.whl#sha256=491b01c40ce79507d1ce28ef4a5a1c3be983bf99bcb6110fc54504650f578436
+numpy==2.4.2
 oauth2client==4.1.3
 ollama==0.6.1
 openai==2.24.0
@@ -122,6 +122,7 @@ outcome==1.3.0.post0
 packaging==25.0
 pandas==2.3.3
 pillow==12.0.0
+pip==25.2
 platformdirs==4.9.6
 playwright==1.58.0
 pre_commit==4.5.1
@@ -132,18 +133,18 @@ protobuf==5.29.6
 pyarrow==24.0.0
 pyasn1==0.6.2
 pyasn1_modules==0.4.2
-pycparser @ file:///C:/miniconda3/conda-bld/pycparser_1757496153123/work
+pycparser==2.23
 pydantic==2.12.5
+pydantic_core==2.41.5
 pydantic-extra-types==2.11.0
 pydantic-settings==2.12.0
-pydantic_core==2.41.5
 pydeck==0.9.2
 pyee==13.0.1
 Pygments==2.19.2
 PyMuPDF==1.27.1
 pyparsing==3.2.5
 PySocks==1.7.1
-python-dateutil @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/python-dateutil_1729038406576/work
+python-dateutil==2.9.0.post0
 python-discovery==1.2.2
 python-dotenv==1.2.1
 python-multipart==0.0.22
@@ -169,12 +170,12 @@ sentry-sdk==2.50.0
 setuptools==78.1.1
 setuptools-scm==9.2.2
 shellingham==1.5.4
-six @ file:///C:/b/abs_149wuyuo1o/croot/six_1744271521515/work
+six==1.17.0
 smmap==5.0.3
 sniffio==1.3.1
 sortedcontainers==2.4.0
 soupsieve==2.8.3
-SQLAlchemy @ file:///C:/b/abs_52irs3wj21/croot/sqlalchemy_1756710015498/work
+SQLAlchemy==2.0.43
 sqlmodel==0.0.38
 starlette==0.50.0
 streamlit==1.58.0
@@ -191,8 +192,8 @@ trio==0.33.0
 trio-websocket==0.12.2
 typer==0.24.0
 typer-slim==0.24.0
+typing_extensions==4.15.0
 typing-inspection==0.4.2
-typing_extensions @ file:///C:/b/abs_ecq8gc0vbm/croot/typing_extensions_1756281142218/work
 tzdata==2025.2
 tzlocal==5.3.1
 uritemplate==4.2.0
@@ -207,13 +208,13 @@ wcwidth==0.6.0
 webdriver-manager==4.0.2
 websocket-client==1.9.0
 websockets==16.0
-Werkzeug @ file:///C:/b/abs_c7bupijx2_/croot/werkzeug_1737448709012/work
+Werkzeug==3.1.3
 wheel==0.45.1
 wsproto==1.3.2
-WTForms @ file:///C:/b/abs_fad62udmds/croot/wtforms_1756820315944/work
+WTForms==3.2.1
 yarl==1.22.0
 youtube-transcript-api==1.2.4
-yt-dlp @ https://github.com/yt-dlp/yt-dlp/archive/master.tar.gz#sha256=1c273d971d629e53198fd73847d24c0275db66a6c55b8d83f0dee9d63678fa1d
+yt-dlp==2026.3.3
 zipp==3.23.0
 zope.event==6.1
 zope.interface==8.2
