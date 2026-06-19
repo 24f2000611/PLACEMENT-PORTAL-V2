@@ -8,7 +8,7 @@ class User(db.Model,UserMixin,RoleMixin):
     id = db.Column(db.Integer,primary_key=True)
     username = db.Column(db.String(100),unique=True)
     email = db.Column(db.String(100),unique=True)
-    password = db.Column(db.String(100))
+    password = db.Column(db.String(256))
     active = db.Column(db.Boolean()) # true,false
     student_profile = db.relationship('Student',backref='user_stu',uselist=False,cascade='all,delete')
     company_profile = db.relationship('Company',backref='user_comp',uselist=False,cascade = 'all,delete')
