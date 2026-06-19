@@ -5,6 +5,7 @@ from flask_security import utils,auth_token_required,roles_required ,hash_passwo
 from Backend.models import *
 import uuid
 
+
 class CompanyRegisterAPI(Resource):
     def post(self):
         register_creds = request.get_json()

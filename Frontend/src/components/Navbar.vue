@@ -19,7 +19,6 @@
           <template v-else-if="userRole === 'company' ">
             <li class="nav-item"><router-link class="nav-link" to="/company">Company Dashboard</router-link></li>
             <li class="nav-item"><router-link class="nav-link" to="/company/profile">My Profile</router-link></li>
-
           </template>
 
           <template v-else-if="userRole === 'student'">
@@ -34,8 +33,7 @@
             </li>  
             <li class="nav-item"><router-link class="nav-link" to="/student/history">My Applications</router-link></li>
             <li class="nav-item"><router-link class="nav-link" to="/student/offer-letters">Offer Letters</router-link></li>
-
-        </template>
+         </template>
           <template v-else>
               <li class="nav-item"><router-link class="nav-link" to="/">Home</router-link></li>
             <li class="nav-item"><router-link class="nav-link" to="/student/register">Register</router-link></li>

@@ -3,7 +3,6 @@ from celery.schedules import crontab
 from Backend.task import *
 
 
-
 def make_celery(app):
     celery_app = Celery(
         app.import_name,

@@ -99,7 +99,7 @@ export default{
                         "Authentication-Token":localStorage.getItem('token')
                     }
                 });
-                const data =await response.json();
+                const data = await response.json();
                 if(response.ok){
                     this.stu_appli =data.stu_appli;
                     this.drive_det = data.drive_det;
@@ -180,9 +180,6 @@ export default{
                 message:''
             };
         },
-       
-
-
     },
     mounted(){
         this.ShowApps();

@@ -4,6 +4,7 @@ from Backend.user_datastore import user_datastore
 from flask_security import utils,auth_token_required,roles_required,login_required,current_user
 from Backend.models import *
 from Backend.cache import cache 
+from Backend.task import notify_student_new_drive
 
 
 def dynamic_admin_key(*args,**kwargs):
@@ -32,6 +33,7 @@ class DashBoardInfo(Resource):
                 "description":s.description
                 # "location":s.location,
             })
+            reg_students.sort(key=lambda x : x['username'].tolower())
 
         reg_companies = []
         for c in Company.query.all():
@@ -152,10 +154,14 @@ class Approvals(Resource):
                 cache.delete(f"company_id_{target.company_id}")
             else:
                 cache.delete(f"company_id_{target.c_id}")
+            
+            if target_type=='Drive' and target.approve_status=='Approved':
+                notify_student_new_drive(target_id)
             return {
                 "message":f"Status Updated to :{target.approve_status}",
                 "messageType":"success"
             },200
+        
         return {"message":"Not found"},404
     
 

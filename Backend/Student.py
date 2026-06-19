@@ -24,7 +24,7 @@ class Mydashboard(Resource):
             "email":user.email,
             "education":student.education,
             "skill":student.skill,
-            "description":student.description
+            "descriurption":student.description
         }
 
         applications = []

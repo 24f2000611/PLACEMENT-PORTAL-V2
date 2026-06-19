@@ -10,7 +10,7 @@ from Backend.extension import mail
 def send_interview_reminders():
     tomorrow = (datetime.utcnow().date() + timedelta(days=1)).strftime("%Y-%m-%d")
     upcoming_interviews = Placement.query.filter(db.func.date(Placement.interview_date)==tomorrow).all()
-    
+
     count =0
     for interview in upcoming_interviews:
         student_email = interview.application.student.user_stu.email
@@ -73,6 +73,23 @@ def generate_monthly_reports():
         mail.send(msg)
 
     return "Monthly report generated successfully."
+
+@shared_task
+def notify_student_new_drive(drive_id):
+    student = Student.query.all()
+    drive = PlacementDrive.query.get(drive_id)
+    for stu in student:
+        email = stu.user_stu.email
+        name = stu.user_stu.username
+        
+        msg = Message(
+            recipients=[email],
+            subject = f"New drive posted",
+            body = f"{name} Start preparing for the new {drive.job_title} now !!"
+        )
+        mail.send(msg)
+    return "New Drive notification send successfully!!"
+    
 
 
 # User Triggered export
