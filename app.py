@@ -84,6 +84,11 @@ api.add_resource(OfferLetter,'/api/company/drive/info/offer-letter')
 def catch_all(path):
     return render_template("index.html")
 
+@app.route('/assets/<path:filename>')
+def serve_assets(filename):
+    return send_from_directory('static/assets', filename)
+
+
 @app.route('/api/status/<task_id>', methods=['GET'])
 def get_task_status(task_id):
     task = AsyncResult(task_id, app=celery)
@@ -95,6 +100,8 @@ def get_task_status(task_id):
         return {"state": "FAILURE"}, 500
         
     return {"state": task.state}, 200
+
+
 
 @app.route('/api/download/<filename>', methods=['GET'])
 def download_file(filename):
